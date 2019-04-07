@@ -120,7 +120,7 @@ const StartHere = (props) => {
 					id="fireYears"
 					label="How long in years will it take you to reach FIRE?"
 					className={classes.textField}
-					value={props.fireYears}
+					value={props.fireYears.toFixed(2)}
 					margin="normal"
 					InputLabelProps={InputLabelProps}
 					disabled

@@ -153,7 +153,7 @@ export const calculateFireValues = (startHere, preSuper, withSuper) => {
 	};
 };
 
-const createAmortizationScheduleAscending = (currentNetWorth, preSuper) => {
+const createAmortizationSchedulePreSuperAscending = (currentNetWorth, preSuper) => {
 	const date = new Date();
 	const formattedGrowthRate = parseFloat(preSuper.growthRate) / 100;
 
@@ -191,7 +191,7 @@ const createAmortizationScheduleAscending = (currentNetWorth, preSuper) => {
 	return schedule;
 };
 
-const createAmortizationScheduleDescending = (preSuper) => {
+const createAmortizationSchedulePreSuperDescending = (preSuper) => {
 	const date = addYears(new Date(), preSuper.moreYears);
 	const formattedGrowthRate = parseFloat(preSuper.growthRate) / 100;
 
@@ -221,16 +221,132 @@ const createAmortizationScheduleDescending = (preSuper) => {
 	return schedule;
 };
 
-export const getChartData = (currentNetWorth, preSuper) => {
-	const preSuperAmortizationSchedule = createAmortizationScheduleAscending(currentNetWorth, preSuper);
-	const preSuperAmortizationScheduleSpending = createAmortizationScheduleDescending(preSuper);
+const createAmortizationScheduleSuperAscending = (startHere, preSuper, superData) => {
+	const preFillDate = new Date();
+	const date = new Date();
+	date.setFullYear(preSuper.preSuperYear);
 
-	console.log(preSuperAmortizationSchedule);
-	console.log(preSuperAmortizationScheduleSpending);
+	let schedule = [];
+
+	if (preFillDate < date) {
+		const formattedGrowthRate = parseFloat(preSuper.growthRate) / 100;
+		const formattedSuperGuarantee = parseFloat(startHere.superGuarantee) / 100;
+
+		let principle = startHere.currentSuper;
+		let preInterest = principle * formattedGrowthRate;
+		let balance = principle + preInterest;
+
+		schedule = [
+			{
+				balance,
+				deposit: principle,
+				interest: preInterest,
+				year: preFillDate.getFullYear(),
+			},
+		];
+
+		const deposit = startHere.incomePreTax * formattedSuperGuarantee;
+		while (preFillDate < date) {
+			preInterest = (balance + deposit) * formattedGrowthRate;
+			balance += deposit + preInterest;
+
+			schedule.push({
+				balance,
+				deposit,
+				interest: preInterest,
+				year: preFillDate.getFullYear(),
+			});
+
+			preFillDate.setFullYear(preFillDate.getFullYear() + 1);
+		}
+
+		let total = 0;
+		let period = 0;
+		do {
+			let deposit = 0;
+			let interest = 0;
+
+			if (period > 0) {
+				deposit = Math.round(
+					pmt(formattedGrowthRate, superData.superYears, +superData.preSuperAmount, -superData.fiSuper),
+				);
+				interest = Math.round(
+					ipmt(formattedGrowthRate, period, superData.superYears, -superData.preSuperAmount, superData.fiSuper),
+				);
+
+				date.setFullYear(date.getFullYear() + 1);
+			}
+
+			total = total + deposit + interest;
+			schedule.push({
+				period,
+				deposit,
+				interest,
+				total,
+				balance: total + Number(superData.preSuperAmount),
+				year: date.getFullYear(),
+			});
+
+			period++;
+		} while (superData.superYears > 0 && superData.superYears - period >= -1);
+	}
+
+	return schedule;
+};
+
+const growingSuperSchedule = (currentSuper, preSuper, superData) => {
+	let schedule = [];
+
+	if (currentSuper < superData.preservationSuper) {
+		let date = new Date();
+		date.setFullYear(preSuper.preSuperYear);
+		date = addYears(date, superData.superYears);
+
+		const formattedGrowthRate = parseFloat(preSuper.growthRate) / 100;
+
+		let principle = superData.fiSuper - superData.preSuperAmount <= 0 ? superData.preSuperAmount : superData.fiSuper;
+		let interest = principle * formattedGrowthRate;
+		let balance = principle + interest;
+
+		schedule.push({
+			principle,
+			interest,
+			balance,
+			year: date.getFullYear(),
+		});
+
+		while (preSuper.preservationAgeReached - date.getFullYear() > 0) {
+			date.setFullYear(date.getFullYear() + 1);
+			principle = balance;
+			interest = balance * formattedGrowthRate;
+			balance = principle + interest;
+
+			schedule.push({
+				principle,
+				interest,
+				balance,
+				year: date.getFullYear(),
+			});
+		}
+	}
+
+	return schedule;
+};
+
+export const getChartData = (startHere, preSuper, superData) => {
+	const preSuperAmortizationSchedule = createAmortizationSchedulePreSuperAscending(startHere.currentNetWorth, preSuper);
+	const preSuperAmortizationScheduleSpending = createAmortizationSchedulePreSuperDescending(preSuper);
+
+	const superAmortizationSchedule = createAmortizationScheduleSuperAscending(startHere, preSuper, superData);
+	const superAmortizationScheduleSpending = growingSuperSchedule(startHere.currentSuper, preSuper, superData);
 
 	const preSuperDataSet = preSuperAmortizationSchedule.concat(preSuperAmortizationScheduleSpending);
-	const labels = preSuperDataSet.map((item) => item.year);
 	const preSuperDataSetData = preSuperDataSet.map((item) => item.balance);
+
+	const superDataSet = superAmortizationSchedule.concat(superAmortizationScheduleSpending);
+	const superDataSetData = superDataSet.map((item) => item.balance);
+
+	const labels = [...new Set(preSuperDataSet.concat(superDataSet).map((item) => item.year))].sort();
 
 	return {
 		labels: labels,
@@ -255,6 +371,27 @@ export const getChartData = (currentNetWorth, preSuper) => {
 				pointRadius: 1,
 				pointHitRadius: 10,
 				data: preSuperDataSetData,
+			},
+			{
+				label: 'Super',
+				fill: false,
+				lineTension: 0.1,
+				backgroundColor: 'rgba(192, 119, 75,0.4)',
+				borderColor: 'rgba(192, 119, 75, 1)',
+				borderCapStyle: 'butt',
+				borderDash: [],
+				borderDashOffset: 0.0,
+				borderJoinStyle: 'miter',
+				pointBorderColor: 'rgba(192, 119, 75, 1)',
+				pointBackgroundColor: '#fff',
+				pointBorderWidth: 1,
+				pointHoverRadius: 5,
+				pointHoverBackgroundColor: 'rgba(192, 119, 75, 1)',
+				pointHoverBorderColor: 'rgba(220,220,220,1)',
+				pointHoverBorderWidth: 2,
+				pointRadius: 1,
+				pointHitRadius: 10,
+				data: superDataSetData,
 			},
 		],
 	};

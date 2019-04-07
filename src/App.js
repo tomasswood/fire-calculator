@@ -10,11 +10,11 @@ import {
 
 import { withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
-import TabContainer from './components/TabContainer';
 import StartHere from './components/StartHere';
 import PreSuper from './components/PreSuper';
 import Super from './components/Super';
@@ -37,6 +37,8 @@ const styles = (theme) => ({
 	},
 });
 
+const containerStyling = { padding: 8 * 3 };
+
 const App = ({ classes }) => {
 	const { store, dispatch } = useContext(StartHereContext);
 
@@ -44,7 +46,7 @@ const App = ({ classes }) => {
 	const preSuper = useMemo(() => calculatePreSuperValues(store), [store]);
 	const superValues = useMemo(() => calculateSuperValues(store, preSuper), [store, preSuper]);
 	const fireValues = useMemo(() => calculateFireValues(store, preSuper, superValues), [store, preSuper, superValues]);
-	const chartData = useMemo(() => getChartData(store.currentNetWorth, preSuper), [store.currentNetWorth, preSuper]);
+	const chartData = useMemo(() => getChartData(store, preSuper, superValues), [store, preSuper, superValues]);
 
 	// dispatch updates for setting start here values
 	const updateStoreValue = (name, value) => dispatch(setStartHereValue(name, value));
@@ -67,23 +69,17 @@ const App = ({ classes }) => {
 					</Tabs>
 				</AppBar>
 
-				{selectedTab === 0 && (
-					<TabContainer>
+				<Typography component="div" style={containerStyling}>
+					{selectedTab === 0 && (
 						<StartHere classes={classes} updateStoreValue={updateStoreValue} {...store} {...fireValues} />
-					</TabContainer>
-				)}
-				{selectedTab === 1 && (
-					<TabContainer>
-						<PreSuper classes={classes} {...preSuper} />
-					</TabContainer>
-				)}
-				{selectedTab === 2 && (
-					<TabContainer>
-						<Super classes={classes} {...superValues} />
-					</TabContainer>
-				)}
+					)}
+					{selectedTab === 1 && <PreSuper classes={classes} {...preSuper} />}
+					{selectedTab === 2 && <Super classes={classes} {...superValues} />}
+				</Typography>
 
-				<FireChart data={chartData} />
+				<Typography component="div" style={containerStyling}>
+					<FireChart data={chartData} />
+				</Typography>
 			</div>
 		</Fragment>
 	);
