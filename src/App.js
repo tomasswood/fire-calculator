@@ -8,7 +8,7 @@ import {
 	getChartData,
 } from './common/calculations';
 
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
@@ -28,9 +28,7 @@ const styles = (theme) => ({
 		flexWrap: 'wrap',
 	},
 	textField: {
-		marginLeft: theme.spacing(1),
-		marginRight: theme.spacing(1),
-		width: 300,
+		width: '100%',
 	},
 	menu: {
 		width: 200,
@@ -77,7 +75,7 @@ const App = ({ classes }) => {
 					{selectedTab === 2 && <Super classes={classes} {...superValues} />}
 				</Typography>
 
-				<Typography component="div" style={containerStyling}>
+				<Typography component="div" style={{ containerStyling, maxWidth: 1000, margin: 'auto' }}>
 					<FireChart data={chartData} />
 				</Typography>
 			</div>
@@ -85,4 +83,4 @@ const App = ({ classes }) => {
 	);
 };
 
-export default withStyles(styles)(App);
+export default withStyles(styles)(withTheme(App));
