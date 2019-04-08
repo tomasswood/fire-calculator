@@ -12,6 +12,7 @@ import { withStyles, withTheme } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
+import Link from '@material-ui/core/Link';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 
@@ -75,8 +76,25 @@ const App = ({ classes }) => {
 					{selectedTab === 2 && <Super classes={classes} {...superValues} />}
 				</Typography>
 
-				<Typography component="div" style={{ containerStyling, maxWidth: 1000, margin: 'auto' }}>
+				<Typography component="div" style={{ containerStyling, maxWidth: 1000, margin: 'auto auto 40px' }}>
 					<FireChart data={chartData} />
+				</Typography>
+
+				<Typography
+					component="div"
+					color="textSecondary"
+					variant="subtitle2"
+					style={{ containerStyling, position: 'fixed', bottom: 10, left: 10 }}
+				>
+					Created by{' '}
+					<Link href="https://thomaswood.me/" title="Thomas Wood">
+						Thomas Wood
+					</Link>{' '}
+					| Based on the{' '}
+					<Link href="https://www.aussiefirebug.com/" title="Aussie Firebug">
+						Aussie Firebug
+					</Link>{' '}
+					calculator.
 				</Typography>
 			</div>
 		</Fragment>

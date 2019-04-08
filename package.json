@@ -4,7 +4,7 @@
 	"description": "FIRE Calculator based on Aussie Firebug spreadsheet",
 	"private": false,
 	"license": "MIT",
-	"homepage": "https://github.com/tomasswood/fire-calculator",
+	"homepage": "https://thomaswood.me/fire-calculator",
 	"bugs": "https://github.com/tomasswood/fire-calculator/issues",
 	"repository": "github:tomasswood/fire-calculator",
 	"author": "Thomas Wood <tom@thomaswood.me> (https://thomaswood.me)",
