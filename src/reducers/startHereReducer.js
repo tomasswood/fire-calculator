@@ -14,11 +14,6 @@ export const initialState = {
 	incomePostTax: '', // B24
 	postTaxSavings: '', // B25
 
-	/** Calculated */
-	fireYears: '', // B28
-	fireYear: '', // B29
-	fireAge: '', // B30
-
 	/** Static */
 	superPreservation: [
 		{
