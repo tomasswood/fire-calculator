@@ -1,8 +1,8 @@
 # FIRE Calculator
 
-[![CircleCI](https://circleci.com/gh/tomasswood/fire-calculator.svg?style=svg)](https://www.aussiefirebug.com/)
+[![CircleCI](https://circleci.com/gh/tomasswood/fire-calculator.svg?style=svg)](https://circleci.com/gh/tomasswood/fire-calculator)
 
-Based on the spreadsheet by [Aussie Firebug](https://github.com/facebook/create-react-app).
+Based on the spreadsheet by [Aussie Firebug](https://www.aussiefirebug.com/).
 
 ### Building
 
