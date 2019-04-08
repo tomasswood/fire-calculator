@@ -29,7 +29,8 @@ const Super = (props: SuperTypes) => {
 				className={classes.textField}
 				value={props.preservationSuper}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -39,7 +40,8 @@ const Super = (props: SuperTypes) => {
 				className={classes.textField}
 				value={props.preSuperAmount}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -49,7 +51,8 @@ const Super = (props: SuperTypes) => {
 				className={classes.textField}
 				value={props.fiSuper}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -59,7 +62,8 @@ const Super = (props: SuperTypes) => {
 				className={classes.textField}
 				value={props.amountToSave}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField

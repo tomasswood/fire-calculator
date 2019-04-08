@@ -10,7 +10,7 @@ export default interface StartHereProps {
 	incomePreTax?: number;
 	incomePostTax?: number;
 	postTaxSavings?: number;
-	fireYears: number;
-	fireYear: number;
+	fireYears: number | string;
+	fireYear: number | string;
 	fireAge: number;
 }

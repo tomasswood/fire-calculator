@@ -37,7 +37,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('currentNetWorth', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				/>
 				<TextField
 					id="currentSuper"
@@ -48,7 +49,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('currentSuper', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				/>
 				<TextField
 					id="superGuarantee"
@@ -59,7 +61,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('superGuarantee', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, endAdornment: <InputAdornment position="end">%</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ endAdornment: <InputAdornment position="end">%</InputAdornment> }}
 				/>
 				<TextField
 					id="investmentGrowthRate"
@@ -70,7 +73,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('investmentGrowthRate', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, endAdornment: <InputAdornment position="end">%</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ endAdornment: <InputAdornment position="end">%</InputAdornment> }}
 				/>
 				<TextField
 					id="inflationRate"
@@ -81,7 +85,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('inflationRate', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, endAdornment: <InputAdornment position="end">%</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ endAdornment: <InputAdornment position="end">%</InputAdornment> }}
 				/>
 				<TextField
 					id="incomePreTax"
@@ -92,7 +97,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('incomePreTax', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				/>
 				<TextField
 					id="incomePostTax"
@@ -103,7 +109,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('incomePostTax', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				/>
 				<TextField
 					id="postTaxSavings"
@@ -114,7 +121,8 @@ const StartHere = (props: StartHereTypes) => {
 					onChange={handleChange('postTaxSavings', true)}
 					type="number"
 					margin="normal"
-					InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+					InputLabelProps={InputLabelProps}
+					InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				/>
 
 				<br />
@@ -124,7 +132,7 @@ const StartHere = (props: StartHereTypes) => {
 					label="Years until FIRE"
 					helperText="How long in years will it take you to reach FIRE?"
 					className={classes.textField}
-					value={props.fireYears.toFixed(2)}
+					value={typeof props.fireYears === 'number' ? props.fireYears.toFixed(2) : props.fireYears}
 					margin="normal"
 					InputLabelProps={InputLabelProps}
 					disabled

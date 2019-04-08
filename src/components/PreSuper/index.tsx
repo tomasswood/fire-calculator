@@ -12,7 +12,15 @@ const PreSuper = (props: PreSuperTypes) => {
 
 	return (
 		<form className={classes.container} noValidate autoComplete="off">
-			<TextField id="age" label="Age" helperText="Your age" className={classes.textField} value={props.age} margin="normal" disabled />
+			<TextField
+				id="age"
+				label="Age"
+				helperText="Your age"
+				className={classes.textField}
+				value={props.age}
+				margin="normal"
+				disabled
+			/>
 			<TextField
 				id="preservationAge"
 				label="Preservation Age"
@@ -50,7 +58,8 @@ const PreSuper = (props: PreSuperTypes) => {
 				className={classes.textField}
 				value={props.postTaxSavingsRate}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, endAdornment: <InputAdornment position="end">%</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ endAdornment: <InputAdornment position="end">%</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -60,7 +69,8 @@ const PreSuper = (props: PreSuperTypes) => {
 				className={classes.textField}
 				value={props.growthRate}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, endAdornment: <InputAdornment position="end">%</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ endAdornment: <InputAdornment position="end">%</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -70,7 +80,8 @@ const PreSuper = (props: PreSuperTypes) => {
 				className={classes.textField}
 				value={props.lifestyleSpendYear}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -80,7 +91,8 @@ const PreSuper = (props: PreSuperTypes) => {
 				className={classes.textField}
 				value={props.lifestyleSpendMonth}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -90,7 +102,8 @@ const PreSuper = (props: PreSuperTypes) => {
 				className={classes.textField}
 				value={props.sustainableNetworthLater}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 
@@ -103,7 +116,8 @@ const PreSuper = (props: PreSuperTypes) => {
 				className={classes.textField}
 				value={props.sustainableNetworthNow}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField
@@ -113,7 +127,8 @@ const PreSuper = (props: PreSuperTypes) => {
 				className={classes.textField}
 				value={props.moreSavings}
 				margin="normal"
-				InputLabelProps={{ ...InputLabelProps, startAdornment: <InputAdornment position="start">$</InputAdornment> }}
+				InputLabelProps={InputLabelProps}
+				InputProps={{ startAdornment: <InputAdornment position="start">$</InputAdornment> }}
 				disabled
 			/>
 			<TextField
