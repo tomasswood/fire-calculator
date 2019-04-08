@@ -1,18 +1,20 @@
 import React from 'react';
 
+import { format } from 'date-fns';
+
 export const StartHereContext = React.createContext();
 
 export const initialState = {
 	/** User entered */
-	dob: '', // B17
-	currentNetWorth: '', // B18
-	currentSuper: '', // B19
-	superGuarantee: '', // B20
-	investmentGrowthRate: '', // B21
-	inflationRate: '', // B22
-	incomePreTax: '', // B23
-	incomePostTax: '', // B24
-	postTaxSavings: '', // B25
+	dob: format(new Date(), 'YYYY-MM-DD'), // B17
+	currentNetWorth: 0, // B18
+	currentSuper: 0, // B19
+	superGuarantee: 0, // B20
+	investmentGrowthRate: 0, // B21
+	inflationRate: 0, // B22
+	incomePreTax: 0, // B23
+	incomePostTax: 0, // B24
+	postTaxSavings: 0, // B25
 
 	/** Static */
 	superPreservation: [

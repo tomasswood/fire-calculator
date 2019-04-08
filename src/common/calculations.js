@@ -27,10 +27,12 @@ export const calculateSuperValues = (startHere, preSuper) => {
 			: fiSuper - preSuperAmount <= 0
 			? 0
 			: Math.round(fiSuper - preSuperAmount);
+
 	const superYears =
-		preSuperAmount >= preservationSuper
-			? 0
-			: amountToSave <= 0
+		typeof preSuperAmount === 'string' ||
+		typeof amountToSave === 'string' ||
+		preSuperAmount >= preservationSuper ||
+		amountToSave <= 0
 			? 0
 			: Number(nper(formattedGrowthRate, startHere.incomePostTax, preSuperAmount, -fiSuper).toFixed(2));
 
@@ -77,7 +79,10 @@ export const calculatePreSuperValues = (startHere) => {
 	const preservationAge = 60;
 	const yearsUntilPreservationAge = preservationAge - age;
 	const preservationAgeReached = addYears(new Date(), yearsUntilPreservationAge).getFullYear();
-	const postTaxSavingsRate = ((startHere.postTaxSavings / startHere.incomePostTax) * 100).toFixed(2);
+	const postTaxSavingsRate =
+		startHere.postTaxSavings === 0 || startHere.incomePostTax === 0
+			? 0
+			: ((startHere.postTaxSavings / startHere.incomePostTax) * 100).toFixed(2);
 	const growthRate = parseFloat(startHere.investmentGrowthRate) - parseFloat(startHere.inflationRate);
 	const lifestyleSpendYear = startHere.incomePostTax - startHere.postTaxSavings;
 	const lifestyleSpendMonth = lifestyleSpendYear / 12;
