@@ -1,7 +1,14 @@
 {
-	"name": "fire",
+	"name": "fire-calculator",
 	"version": "0.1.0",
-	"private": true,
+	"description": "FIRE Calculator based on Aussie Firebug spreadsheet",
+	"private": false,
+	"license": "MIT",
+	"homepage": "https://github.com/tomasswood/fire-calculator",
+	"bugs": "https://github.com/tomasswood/fire-calculator/issues",
+	"repository": "github:tomasswood/fire-calculator",
+	"author": "Thomas Wood <tom@thomaswood.me> (https://thomaswood.me)",
+	"main": "index.tsx",
 	"dependencies": {
 		"@material-ui/core": "4.0.0-alpha.6",
 		"chart.js": "^2.8.0",
