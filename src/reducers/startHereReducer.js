@@ -9,7 +9,7 @@ export const initialState = {
 	dob: format(new Date(), 'YYYY-MM-DD'), // B17
 	currentNetWorth: 0, // B18
 	currentSuper: 0, // B19
-	superGuarantee: 0, // B20
+	superGuarantee: 9.5, // B20
 	investmentGrowthRate: 0, // B21
 	inflationRate: 0, // B22
 	incomePreTax: 0, // B23
